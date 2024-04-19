@@ -1,0 +1,22 @@
+---
+- name: Deploy PostgreSQL
+  hosts: localhost
+  become: true
+  tasks:
+
+  - name: update
+    apt:
+      update_cache: yes
+
+  - name: install
+    apt:
+      name:
+        - postgresql
+        - postgresql-contrib
+        - libpq-dev
+      state: present
+
+  - name: fix problems
+    pip:
+      name: psycopg2
+      state: present
